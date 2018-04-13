@@ -33,8 +33,8 @@ module peg_cache() {
 /****************************/
 // Peg Hole
 /****************************/
-peg_depth = 2;
-peg_radius = 1 * 1/cos(180/5);
+peg_depth = 3;
+peg_radius = 1;
 peg_diameter = peg_radius * 2;
 
 module peg_hole() {
@@ -45,12 +45,11 @@ module peg_hole() {
 // Side
 /****************************/
 wall_width = 1;
-top_width = 2.2;
+top_width = peg_depth + wall_width;
 side_x = wall_width + magnent_diameter + wall_width + card_box_x + wall_width + peg_cache_diameter + wall_width;
 side_y = wall_width + card_box_y + wall_width;
-// side z minimum is magnent_diameter + wall_width + top_width
-side_z = magnent_diameter + wall_width + top_width;
-if (side_z < card_box_z / 2 + top_width) {side_z = card_box_z / 2 + top_width;}
+side_z = magnent_diameter + wall_width + wall_width;
+side_z = card_box_z / 2 + top_width;
 
 difference() {
     cube([side_x, side_y, side_z]);
@@ -80,8 +79,8 @@ difference() {
 
     // Add magnents
     // End
-    translate([side_x - magnent_height, magnent_radius + wall_width, magnent_radius + top_width])rotate([0, 90, 0]) magnent();
-    translate([side_x - magnent_height, side_y - (magnent_radius + wall_width), magnent_radius + top_width])rotate([0, 90, 0]) magnent();
+    translate([side_x - magnent_height, magnent_radius + wall_width, magnent_radius + wall_width])rotate([0, 90, 0]) magnent();
+    translate([side_x - magnent_height, side_y - (magnent_radius + wall_width), magnent_radius + wall_width])rotate([0, 90, 0]) magnent();
     // Left Side
     translate([wall_width + magnent_radius, wall_width + magnent_radius, side_z - magnent_height]) magnent();
     translate([wall_width + magnent_radius, side_y - (wall_width + magnent_radius), side_z - magnent_height]) magnent();
