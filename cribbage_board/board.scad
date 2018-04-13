@@ -34,7 +34,7 @@ module peg_cache() {
 // Peg Hole
 /****************************/
 peg_depth = 2;
-peg_radius = 2.5 * 1/cos(180/8);
+peg_radius = 1 * 1/cos(180/5);
 peg_diameter = peg_radius * 2;
 
 module peg_hole() {
@@ -56,9 +56,9 @@ difference() {
     cube([side_x, side_y, side_z]);
 
     // Add peg spots
-    for (y_lane = [1:5]) {
-        if (y_lane !=3) {
-            y_offset = (side_y - wall_width * 2) / 5 * y_lane - peg_diameter;
+    for (y_lane = [1:7]) {
+        if (y_lane !=3 && y_lane !=4 && y_lane !=5) {
+            y_offset = (side_y - wall_width * 2) / 7 * y_lane - peg_diameter;
             for (i = [1:17]) {
                 if (i != 6 && i != 12) {
                     translate([side_x / 19 * (i+1), y_offset, -0.1]) peg_hole();
@@ -67,9 +67,9 @@ difference() {
         }
     }
 
-    // Add Starting holes
-    translate([side_x / 19, (side_y - (wall_width * 2)) / 5 + peg_radius / 4, -0.1]) peg_hole();
-    translate([side_x / 19, ((side_y - (wall_width * 2)) / 5) * 4 + peg_radius / 4, -0.1]) peg_hole();
+    // Add Starting hole
+    translate([side_x / 19, ((side_y - (wall_width * 2)) / 7) * 1.25, -0.1]) peg_hole();
+    translate([side_x / 19, ((side_y - (wall_width * 2)) / 7) * 6.25, -0.1]) peg_hole();
 
     // add deck box hole
     translate([wall_width + magnent_diameter + wall_width, wall_width, top_width]) card_box();
