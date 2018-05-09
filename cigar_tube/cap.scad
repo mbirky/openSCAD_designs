@@ -3,7 +3,6 @@ include <../threads.scad>;
 cap_radius = 18;
 cap_thickness = 2;
 thread_height = 12.7;
-edge_cut = 15;
 
 difference() {
     cylinder(cap_radius + cap_thickness + thread_height, cap_radius, cap_radius, false);
@@ -15,5 +14,5 @@ difference() {
 
     rotate([90, 0, 0]) cylinder(40, cap_radius, cap_radius, true);
 
-    cube([40, 40, edge_cut], center=true);
+    translate([-20, -20, 0]) cube([40, 40, cap_radius / 2]);
 }
